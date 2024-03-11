@@ -1,0 +1,14 @@
+name = "qtrpc"
+main = "./worker.ts"
+compatibility_date = "2024-02-08"
+
+routes = [
+  { pattern = "qtrpc.aarono.dev/*", zone_name = "aarono.dev" },
+]
+
+[[queues.producers]]
+binding = "QUEUE"
+queue = "qtrpc"
+
+[[queues.consumers]]
+queue = "qtrpc"

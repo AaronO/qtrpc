@@ -1,0 +1,35 @@
+{
+  "name": "qtrpc",
+  "version": "0.0.0",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "bun run build:dts && bun run build:js",
+    "build:dts": "tsc --declaration --emitDeclarationOnly",
+    "build:js": "bun run ./build.mjs",
+    "prepublishOnly": "bun run build",
+    "deploy": "cd example && wrangler deploy",
+    "dev": "cd example && wrangler dev",
+    "format": "prettier --write ."
+  },
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@trpc/server": "^10",
+    "@trpc/client": "^10"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20230419.0",
+    "@types/bun": "^1.0.8",
+    "dts-bundle-generator": "^9.3.1",
+    "get-tsconfig": "^4.7.3",
+    "prettier": "^3.2.5",
+    "typescript": "^4.5.4",
+    "wrangler": "^3.0.0",
+    "zod": "^3.22.4"
+  }
+}
