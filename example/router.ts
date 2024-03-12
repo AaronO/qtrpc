@@ -1,11 +1,17 @@
 import z from "zod";
 import { initTRPC } from "@trpc/server";
+import { Queue } from "@cloudflare/workers-types";
+import { QTRPCMessage } from "../src";
 
-const t = initTRPC.create();
+interface Env {
+  QUEUE: Queue<QTRPCMessage>;
+}
+
+const t = initTRPC.context<{ env: Env }>().create();
 
 export const users = t.router({
-  boom: t.procedure.mutation(() => {
-    console.log("boom");
+  boom: t.procedure.mutation(({ ctx }) => {
+    console.log("boom", ctx);
   }),
   sendEmail: t.procedure
     .input(
