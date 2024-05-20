@@ -88,6 +88,9 @@ class QueueClient<TRouter extends AnyRouter> {
     path: TPath,
     inputs: TInput[],
   ): Promise<void> {
+    if (inputs.length === 0) {
+      return;
+    }
     const messages: MessageSendRequest<QTRPCMessage>[] = inputs.map(
       (input) => ({
         body: {
